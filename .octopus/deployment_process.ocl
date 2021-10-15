@@ -41,3 +41,20 @@ step "Deploy to IIS" {
         }
     }
 }
+
+step "Run a Script" {
+    properties = {
+        Octopus.Action.TargetRoles = "web"
+    }
+
+    action {
+        action_type = "Octopus.Script"
+        properties = {
+            Octopus.Action.RunOnServer = "false"
+            Octopus.Action.Script.ScriptBody = "Write-Highlight \"hello world!\""
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "PowerShell"
+        }
+        worker_pool_variable = ""
+    }
+}
