@@ -70,3 +70,23 @@ step "Run a Script" {
         worker_pool_variable = ""
     }
 }
+
+step "SQL - Create Database If Not Exists" {
+    properties = {
+        Octopus.Action.TargetRoles = "db"
+    }
+
+    action {
+        properties = {
+            createCommandTimeout = "30"
+            createDatabaseName = "#{DatabaseName}"
+            createSqlLoginPasswordWhoHasRights = "#{SQLPassword}"
+            createSqlLoginUserWhoHasCreateUserRights = "#{SQLAdminUser}"
+            createSqlServer = "#{SQLServer}"
+            Octopus.Action.RunOnServer = "false"
+            Octopus.Action.Template.Id = "ActionTemplates-1"
+            Octopus.Action.Template.Version = "3"
+        }
+        worker_pool_variable = ""
+    }
+}
