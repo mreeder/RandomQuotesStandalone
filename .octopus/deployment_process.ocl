@@ -70,3 +70,21 @@ step "Run a Script" {
         worker_pool_variable = ""
     }
 }
+
+step "SQL - Add Database User To Role" {
+    properties = {
+        Octopus.Action.TargetRoles = "db"
+    }
+
+    action {
+        properties = {
+            createSqlLoginPasswordWhoHasRights = "#{SQLPassword}"
+            createSqlLoginUserWhoHasCreateUserRights = "#{SQLAdminUser}"
+            createSqlServer = "#{SQLServer}"
+            Octopus.Action.RunOnServer = "false"
+            Octopus.Action.Template.Id = "ActionTemplates-22"
+            Octopus.Action.Template.Version = "2"
+        }
+        worker_pool_variable = ""
+    }
+}
